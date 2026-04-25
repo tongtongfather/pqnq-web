@@ -12,6 +12,7 @@ class App {
         this.render();
         this.setupEventListeners();
         this.setupScrollEffects();
+        this.setupFadeInAnimations();
     }
 
     render() {
@@ -19,8 +20,8 @@ class App {
         app.innerHTML = `
             ${this.renderNavigation()}
             ${this.renderHero()}
-            ${this.renderAbout()}
-            ${this.renderMenu()}
+            ${this.renderBrandStory()}
+            ${this.renderStandards()}
             ${this.renderContact()}
             ${this.renderFooter()}
         `;
@@ -54,79 +55,62 @@ class App {
             <section class="hero" id="home">
                 <div class="container">
                     <div class="hero-content">
-                        <h1 class="hero-title">PQNQ</h1>
-                        <p class="hero-subtitle">미니멀리즘과 맛의 조화</p>
-                        <a href="#menu" class="hero-cta">메뉴 보기</a>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    renderAbout() {
-        return `
-            <section class="section about" id="about">
-                <div class="container">
-                    <h2 class="section-title">PQNQ 이야기</h2>
-                    <div class="about-content">
-                        <div class="about-text">
-                            <p>PQNQ는 최소한의 공간과 최대한의 맛을 추구하는 미니멀 키친입니다.</p>
-                            <br>
-                            <p>우리는 불필요한 것을 제거하고 음식의 본질에 집중합니다. 신선한 재료, 정성스러운 조리, 그리고 완벽한 밸런스. 이것이 PQNQ의 철학입니다.</p>
-                            <br>
-                            <p>모든 요리는 예술 작품처럼 정성껏 준비되며, 여러분의 식사 경험을 특별하게 만들어 드립니다.</p>
+                        <h1 class="hero-title brand-title fade-in">PQNQ</h1>
+                        <p class="hero-subtitle brand-subtitle fade-in">Piquenique Bistro</p>
+                        <p class="hero-subtitle brand-subtitle fade-in">1:1:1, 건강한 삶을 위한 가장 정직한 비율.</p>
+                        <div class="hero-concept fade-in">
+                            맛을 위해 건강을 타협하지 않는 '슬로우 쿠킹'
                         </div>
-                        <div class="about-image"></div>
                     </div>
                 </div>
             </section>
         `;
     }
 
-    renderMenu() {
-        const menuItems = [
+    renderBrandStory() {
+        return `
+            <section class="section brand-story" id="brand-story">
+                <div class="container">
+                    <div class="brand-story-content">
+                        <h2 class="section-title fade-in">'먹는 것'이 곧 '살아가는 것'이기에.</h2>
+                        <div class="brand-story-text body-text fade-in">
+                            <p>식당을 운영하며 저희를 키워내신 어머니의 뒷모습에서 음식의 무게를 배웠습니다.</p>
+                            <br>
+                            <p>프랑스에서 생활하며 배운 음식문화를 바탕으로 마가린과 씨앗 오일을 배제하고, 올리브오일과 풀을 먹고 자란(Grass-fed) 버터와 유제품을 사용합니다.</p>
+                            <br>
+                            <p>저온 조리로 조리과정에서 생기는 독소물질을 최소화합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
+    renderStandards() {
+        const standards = [
             {
-                name: "시그니처 덮밥",
-                description: "신선한 채소와 완벽하게 조리된 밥의 조화",
-                price: "₩28,000"
+                title: "Low Glycemic & Anti-Inflammatory",
+                description: "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구."
             },
             {
-                name: "미니멀 파스타",
-                description: "최소한의 재료로 만든 최상의 맛",
-                price: "₩32,000"
+                title: "The 1:1:1 Rule",
+                description: "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율."
             },
             {
-                name: "순수 스테이크",
-                description: "육질의 본질을 살린 미디엄 레어",
-                price: "₩48,000"
-            },
-            {
-                name: "정원 샐러드",
-                description: "계절의 신선함을 그대로 담아",
-                price: "₩18,000"
-            },
-            {
-                name: "디저트 플레이트",
-                description: "미니멀한 디자인과 깊은 맛의 만남",
-                price: "₩15,000"
-            },
-            {
-                name: "스페셜 코스",
-                description: "셰프가 정성껏 준비한 7가지 요리",
-                price: "₩85,000"
+                title: "Pure & Real Food",
+                description: "직접 만든 스프와 카레, 정직한 소스와 재료."
             }
         ];
 
         return `
-            <section class="section menu" id="menu">
+            <section class="section standards" id="standards">
                 <div class="container">
-                    <h2 class="section-title">메뉴</h2>
-                    <div class="menu-grid">
-                        ${menuItems.map(item => `
-                            <div class="menu-item">
-                                <h3 class="menu-item-name">${item.name}</h3>
-                                <p class="menu-item-description">${item.description}</p>
-                                <p class="menu-item-price">${item.price}</p>
+                    <h2 class="section-title fade-in">PQNQ의 기준</h2>
+                    <div class="standards-grid">
+                        ${standards.map((standard, index) => `
+                            <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
+                                <h3 class="standard-title">${standard.title}</h3>
+                                <p class="standard-description">${standard.description}</p>
                             </div>
                         `).join('')}
                     </div>
@@ -139,19 +123,13 @@ class App {
         return `
             <section class="section contact" id="contact">
                 <div class="container">
-                    <h2 class="section-title contact-title">찾아오시는 길</h2>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <span class="contact-label">주소</span>
-                            <span class="contact-value">서울시 강남구 테헤란로 123</span>
+                    <div class="contact-content">
+                        <h2 class="contact-title fade-in">Location & Contact</h2>
+                        <div class="contact-address fade-in">
+                            서울특별시 강남구 강남대로48길 6, 1층 (피끄니크비스트로)
                         </div>
-                        <div class="contact-item">
-                            <span class="contact-label">전화</span>
-                            <span class="contact-value">02-1234-5678</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">영업시간</span>
-                            <span class="contact-value">11:30 - 22:00</span>
+                        <div class="contact-vision fade-in">
+                            "우리는 더 건강한 미래를 연구합니다. 이제 온라인에서도 PQNQ의 철학을 만나보세요."
                         </div>
                     </div>
                 </div>
@@ -269,13 +247,33 @@ class App {
     }
 
     // Initialize scroll animations
-    initializeAnimations() {
-        const elements = document.querySelectorAll('.menu-item, .about-text, .contact-item');
+    setupFadeInAnimations() {
+        const fadeElements = document.querySelectorAll('.fade-in');
         
-        elements.forEach(element => {
+        fadeElements.forEach(element => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
-            element.style.transition = 'all 0.6s ease';
+            element.style.transition = 'all 1s ease';
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
         });
     }
 }
@@ -283,31 +281,5 @@ class App {
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const app = new App();
-    app.initializeAnimations();
 });
 
-// Add intersection observer for better performance
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Start observing after DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.menu-item, .about-text, .contact-item');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
-});
