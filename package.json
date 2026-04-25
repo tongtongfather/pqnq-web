@@ -1,0 +1,21 @@
+{
+  "name": "pqnq-restaurant",
+  "version": "1.0.0",
+  "description": "PQNQ 레스토랑 - 미니멀 키친 웹사이트",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Build completed'",
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": [
+    "restaurant",
+    "pqnq",
+    "minimal",
+    "bistro"
+  ],
+  "author": "PQNQ",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
