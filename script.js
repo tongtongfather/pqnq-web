@@ -1,9 +1,22 @@
-// Component-based structure mimicking React
+// Import modular components
+// Note: In a real ES6 module environment, you would use:
+// import { Hero, BrandStory, Standards, Contact, Navigation, Footer } from './components/index.js';
+// For now, we'll simulate the component structure
+
+// Component-based structure mimicking React with modular components
 class App {
     constructor() {
         this.state = {
             isMobileMenuOpen: false,
             isScrolled: false
+        };
+        this.components = {
+            Navigation: new Navigation(),
+            Hero: new Hero(),
+            BrandStory: new BrandStory(),
+            Standards: new Standards(),
+            Contact: new Contact(),
+            Footer: new Footer()
         };
         this.init();
     }
@@ -18,132 +31,12 @@ class App {
     render() {
         const app = document.getElementById('app');
         app.innerHTML = `
-            ${this.renderNavigation()}
-            ${this.renderHero()}
-            ${this.renderBrandStory()}
-            ${this.renderStandards()}
-            ${this.renderContact()}
-            ${this.renderFooter()}
-        `;
-    }
-
-    renderNavigation() {
-        return `
-            <nav class="nav" id="navigation">
-                <div class="container">
-                    <div class="nav-content">
-                        <div class="logo">PQNQ</div>
-                        <ul class="nav-links" id="navLinks">
-                            <li><a href="#home" class="nav-link">홈</a></li>
-                            <li><a href="#about" class="nav-link">소개</a></li>
-                            <li><a href="#menu" class="nav-link">메뉴</a></li>
-                            <li><a href="#contact" class="nav-link">연락처</a></li>
-                        </ul>
-                        <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
-        `;
-    }
-
-    renderHero() {
-        return `
-            <section class="hero" id="home">
-                <div class="container">
-                    <div class="hero-content">
-                        <h1 class="hero-title brand-title fade-in">PQNQ</h1>
-                        <p class="hero-subtitle brand-subtitle fade-in">Piquenique Bistro</p>
-                        <p class="hero-subtitle brand-subtitle fade-in">1:1:1, 건강한 삶을 위한 가장 정직한 비율.</p>
-                        <div class="hero-concept fade-in">
-                            맛을 위해 건강을 타협하지 않는 '슬로우 쿠킹'
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    renderBrandStory() {
-        return `
-            <section class="section brand-story" id="brand-story">
-                <div class="container">
-                    <div class="brand-story-content">
-                        <h2 class="section-title fade-in">'먹는 것'이 곧 '살아가는 것'이기에.</h2>
-                        <div class="brand-story-text body-text fade-in">
-                            <p>식당을 운영하며 저희를 키워내신 어머니의 뒷모습에서 음식의 무게를 배웠습니다.</p>
-                            <br>
-                            <p>프랑스에서 생활하며 배운 음식문화를 바탕으로 마가린과 씨앗 오일을 배제하고, 올리브오일과 풀을 먹고 자란(Grass-fed) 버터와 유제품을 사용합니다.</p>
-                            <br>
-                            <p>저온 조리로 조리과정에서 생기는 독소물질을 최소화합니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    renderStandards() {
-        const standards = [
-            {
-                title: "Low Glycemic & Anti-Inflammatory",
-                description: "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구."
-            },
-            {
-                title: "The 1:1:1 Rule",
-                description: "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율."
-            },
-            {
-                title: "Pure & Real Food",
-                description: "직접 만든 스프와 카레, 정직한 소스와 재료."
-            }
-        ];
-
-        return `
-            <section class="section standards" id="standards">
-                <div class="container">
-                    <h2 class="section-title fade-in">PQNQ의 기준</h2>
-                    <div class="standards-grid">
-                        ${standards.map((standard, index) => `
-                            <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
-                                <h3 class="standard-title">${standard.title}</h3>
-                                <p class="standard-description">${standard.description}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    renderContact() {
-        return `
-            <section class="section contact" id="contact">
-                <div class="container">
-                    <div class="contact-content">
-                        <h2 class="contact-title fade-in">Location & Contact</h2>
-                        <div class="contact-address fade-in">
-                            서울특별시 강남구 강남대로48길 6, 1층 (피끄니크비스트로)
-                        </div>
-                        <div class="contact-vision fade-in">
-                            "우리는 더 건강한 미래를 연구합니다. 이제 온라인에서도 PQNQ의 철학을 만나보세요."
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `;
-    }
-
-    renderFooter() {
-        return `
-            <footer class="footer">
-                <div class="container">
-                    <p class="footer-text">© 2024 PQNQ. All rights reserved.</p>
-                </div>
-            </footer>
+            ${this.components.Navigation.render()}
+            ${this.components.Hero.render()}
+            ${this.components.BrandStory.render()}
+            ${this.components.Standards.render()}
+            ${this.components.Contact.render()}
+            ${this.components.Footer.render()}
         `;
     }
 
