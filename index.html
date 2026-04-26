@@ -385,43 +385,8 @@ body {
     </style>
 </head>
 <body>
-    <div id="app"></div>
-    
-    <script>
-// PQNQ Restaurant - Pure HTML/JavaScript Application
-// No React/JSX - pure vanilla JavaScript
-
-// Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    initializeApp();
-});
-
-function initializeApp() {
-    renderApp();
-    setupEventListeners();
-    setupScrollEffects();
-    setupFadeInAnimations();
-}
-
-function renderApp() {
-    const app = document.getElementById('app');
-    app.innerHTML = getFullHTML();
-}
-
-function getFullHTML() {
-    return `
-        ${getNavigationHTML()}
-        ${getHeroHTML()}
-        ${getBrandStoryHTML()}
-        ${getStandardsHTML()}
-        ${getContactHTML()}
-        ${getFooterHTML()}
-    `;
-}
-
-// Navigation HTML
-function getNavigationHTML() {
-    return `
+    <div id="app">
+        <!-- Navigation -->
         <nav class="nav" id="navigation">
             <div class="container">
                 <div class="nav-content">
@@ -440,12 +405,8 @@ function getNavigationHTML() {
                 </div>
             </div>
         </nav>
-    `;
-}
 
-// Hero Section HTML
-function getHeroHTML() {
-    return `
+        <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="container">
                 <div class="hero-content">
@@ -458,12 +419,8 @@ function getHeroHTML() {
                 </div>
             </div>
         </section>
-    `;
-}
 
-// Brand Story HTML
-function getBrandStoryHTML() {
-    return `
+        <!-- Brand Story Section -->
         <section class="section brand-story" id="brand-story">
             <div class="container">
                 <div class="brand-story-content">
@@ -478,37 +435,29 @@ function getBrandStoryHTML() {
                 </div>
             </div>
         </section>
-    `;
-}
 
-// Standards HTML
-function getStandardsHTML() {
-    return `
+        <!-- Standards Section -->
         <section class="section standards" id="standards">
             <div class="container">
                 <h2 class="section-title fade-in">PQNQ의 기준</h2>
                 <div class="standards-grid">
-                    ${getStandardCardHTML("Low Glycemic & Anti-Inflammatory", "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구.", 0)}
-                    ${getStandardCardHTML("The 1:1:1 Rule", "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율.", 1)}
-                    ${getStandardCardHTML("Pure & Real Food", "직접 만든 스프와 카레, 정직한 소스와 재료.", 2)}
+                    <div class="standard-card fade-in" style="animation-delay: 0s">
+                        <h3 class="standard-title">Low Glycemic & Anti-Inflammatory</h3>
+                        <p class="standard-description">혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구.</p>
+                    </div>
+                    <div class="standard-card fade-in" style="animation-delay: 0.2s">
+                        <h3 class="standard-title">The 1:1:1 Rule</h3>
+                        <p class="standard-description">당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율.</p>
+                    </div>
+                    <div class="standard-card fade-in" style="animation-delay: 0.4s">
+                        <h3 class="standard-title">Pure & Real Food</h3>
+                        <p class="standard-description">직접 만든 스프와 카레, 정직한 소스와 재료.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    `;
-}
 
-function getStandardCardHTML(title, description, index) {
-    return `
-        <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
-            <h3 class="standard-title">${title}</h3>
-            <p class="standard-description">${description}</p>
-        </div>
-    `;
-}
-
-// Contact HTML
-function getContactHTML() {
-    return `
+        <!-- Contact Section -->
         <section class="section contact" id="contact">
             <div class="container">
                 <div class="contact-content">
@@ -522,19 +471,22 @@ function getContactHTML() {
                 </div>
             </div>
         </section>
-    `;
-}
 
-// Footer HTML
-function getFooterHTML() {
-    return `
+        <!-- Footer -->
         <footer class="footer">
             <div class="container">
                 <p class="footer-text">© 2024 PQNQ. All rights reserved.</p>
             </div>
         </footer>
-    `;
-}
+    </div>
+    
+    <script>
+// PQNQ Restaurant - Minimal JavaScript for Animations Only
+document.addEventListener('DOMContentLoaded', function() {
+    setupEventListeners();
+    setupScrollEffects();
+    setupFadeInAnimations();
+});
 
 // Event Listeners
 function setupEventListeners() {
