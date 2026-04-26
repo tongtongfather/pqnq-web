@@ -1,8 +1,36 @@
-// PQNQ Restaurant - Single File Application
-// All components merged into one file for simplicity
+// PQNQ Restaurant - Pure HTML/JavaScript Application
+// No React/JSX - pure vanilla JavaScript
 
-// Navigation Component
-function renderNavigation() {
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
+
+function initializeApp() {
+    renderApp();
+    setupEventListeners();
+    setupScrollEffects();
+    setupFadeInAnimations();
+}
+
+function renderApp() {
+    const app = document.getElementById('app');
+    app.innerHTML = getFullHTML();
+}
+
+function getFullHTML() {
+    return `
+        ${getNavigationHTML()}
+        ${getHeroHTML()}
+        ${getBrandStoryHTML()}
+        ${getStandardsHTML()}
+        ${getContactHTML()}
+        ${getFooterHTML()}
+    `;
+}
+
+// Navigation HTML
+function getNavigationHTML() {
     return `
         <nav class="nav" id="navigation">
             <div class="container">
@@ -25,8 +53,8 @@ function renderNavigation() {
     `;
 }
 
-// Hero Section Component
-function renderHero() {
+// Hero Section HTML
+function getHeroHTML() {
     return `
         <section class="hero" id="home">
             <div class="container">
@@ -43,8 +71,8 @@ function renderHero() {
     `;
 }
 
-// Brand Story Component
-function renderBrandStory() {
+// Brand Story HTML
+function getBrandStoryHTML() {
     return `
         <section class="section brand-story" id="brand-story">
             <div class="container">
@@ -63,42 +91,33 @@ function renderBrandStory() {
     `;
 }
 
-// Standards Component
-function renderStandards() {
-    const standards = [
-        {
-            title: "Low Glycemic & Anti-Inflammatory",
-            description: "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구."
-        },
-        {
-            title: "The 1:1:1 Rule",
-            description: "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율."
-        },
-        {
-            title: "Pure & Real Food",
-            description: "직접 만든 스프와 카레, 정직한 소스와 재료."
-        }
-    ];
-
+// Standards HTML
+function getStandardsHTML() {
     return `
         <section class="section standards" id="standards">
             <div class="container">
                 <h2 class="section-title fade-in">PQNQ의 기준</h2>
                 <div class="standards-grid">
-                    ${standards.map((standard, index) => `
-                        <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
-                            <h3 class="standard-title">${standard.title}</h3>
-                            <p class="standard-description">${standard.description}</p>
-                        </div>
-                    `).join('')}
+                    ${getStandardCardHTML("Low Glycemic & Anti-Inflammatory", "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구.", 0)}
+                    ${getStandardCardHTML("The 1:1:1 Rule", "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율.", 1)}
+                    ${getStandardCardHTML("Pure & Real Food", "직접 만든 스프와 카레, 정직한 소스와 재료.", 2)}
                 </div>
             </div>
         </section>
     `;
 }
 
-// Contact Component
-function renderContact() {
+function getStandardCardHTML(title, description, index) {
+    return `
+        <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
+            <h3 class="standard-title">${title}</h3>
+            <p class="standard-description">${description}</p>
+        </div>
+    `;
+}
+
+// Contact HTML
+function getContactHTML() {
     return `
         <section class="section contact" id="contact">
             <div class="container">
@@ -116,8 +135,8 @@ function renderContact() {
     `;
 }
 
-// Footer Component
-function renderFooter() {
+// Footer HTML
+function getFooterHTML() {
     return `
         <footer class="footer">
             <div class="container">
@@ -127,34 +146,88 @@ function renderFooter() {
     `;
 }
 
-// Main Application
-class App {
-    constructor() {
-        this.state = {
-            isMobileMenuOpen: false,
-            isScrolled: false
-        };
-        this.init();
+// Event Listeners
+function setupEventListeners() {
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
     }
 
-    init() {
-        this.render();
-        this.setupEventListeners();
-        this.setupScrollEffects();
-        this.setupFadeInAnimations();
-    }
+    // Smooth scrolling for navigation links
+    const navLinks_elements = document.querySelectorAll('.nav-link');
+    navLinks_elements.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
-    render() {
-        const app = document.getElementById('app');
-        app.innerHTML = `
-            ${renderNavigation()}
-            ${renderHero()}
-            ${renderBrandStory()}
-            ${renderStandards()}
-            ${renderContact()}
-            ${renderFooter()}
-        `;
-    }
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
+// Scroll Effects
+function setupScrollEffects() {
+    const nav = document.getElementById('navigation');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+}
+
+// Fade-in Animations
+function setupFadeInAnimations() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach(function(element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'all 1s ease';
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                setTimeout(function() {
+                    entry.target.classList.add('visible');
+                }, 100);
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach(function(element) {
+        observer.observe(element);
+    });
+}
 
     setupEventListeners() {
         // Mobile menu toggle
