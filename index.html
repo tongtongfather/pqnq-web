@@ -4,14 +4,620 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PQNQ - Piquenique Bistro</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-black: #0a0a0a;
+    --primary-white: #ffffff;
+    --gray-light: #f8f8f8;
+    --gray-medium: #666666;
+    --gray-dark: #333333;
+    --accent: #c9a961;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    --spacing-xxl: 8rem;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 200;
+    line-height: 1.8;
+    color: var(--primary-black);
+    background: var(--primary-white);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Typography */
+.brand-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(4rem, 12vw, 12rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--primary-black);
+}
+
+.brand-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1.6;
+    color: var(--gray-medium);
+    letter-spacing: 0.05em;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.body-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 2;
+    color: var(--gray-dark);
+}
+
+.caption-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    line-height: 1.6;
+    color: var(--gray-medium);
+}
+
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    padding: var(--spacing-sm) 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.05);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--primary-black);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-md);
+    list-style: none;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--primary-black);
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.05em;
+}
+
+.nav-link:hover {
+    opacity: 0.5;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--gray-light) 0%, var(--primary-white) 100%);
+    padding: var(--spacing-xxl) 0;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 1200px;
+}
+
+.hero-title {
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-subtitle {
+    margin-bottom: var(--spacing-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-concept {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--gray-medium);
+    font-style: italic;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--gray-medium);
+    border-bottom: 1px solid var(--gray-medium);
+}
+
+/* Section Styles */
+.section {
+    padding: var(--spacing-xxl) 0;
+}
+
+/* Brand Story Section */
+.brand-story {
+    background: var(--primary-white);
+}
+
+.brand-story-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.brand-story-text {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Standards Section */
+.standards {
+    background: var(--gray-light);
+}
+
+.standards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.standard-card {
+    background: var(--primary-white);
+    padding: var(--spacing-lg);
+    border-radius: 4px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.standard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.standard-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.3;
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.standard-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    line-height: 1.8;
+    color: var(--gray-dark);
+}
+
+/* Contact Section */
+.contact {
+    background: var(--primary-black);
+    color: var(--primary-white);
+    text-align: center;
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: var(--primary-white);
+    margin-bottom: var(--spacing-lg);
+}
+
+.contact-address {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.8;
+    color: var(--primary-white);
+    margin-bottom: var(--spacing-lg);
+}
+
+.contact-vision {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
+    line-height: 1.6;
+    color: var(--gray-medium);
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: var(--primary-black);
+    color: var(--primary-white);
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 200;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 1px;
+    background: var(--primary-black);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: var(--primary-white);
+        flex-direction: column;
+        padding: var(--spacing-md);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .hero {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .section {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .standards-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .standard-card {
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .brand-title {
+        font-size: clamp(3rem, 10vw, 6rem);
+    }
+
+    .hero-concept {
+        padding: var(--spacing-sm);
+    }
+}
+    </style>
 </head>
 <body>
     <div id="app"></div>
     
-    <!-- Main application -->
-    <script src="./script.js"></script>
+    <script>
+// PQNQ Restaurant - Pure HTML/JavaScript Application
+// No React/JSX - pure vanilla JavaScript
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
+
+function initializeApp() {
+    renderApp();
+    setupEventListeners();
+    setupScrollEffects();
+    setupFadeInAnimations();
+}
+
+function renderApp() {
+    const app = document.getElementById('app');
+    app.innerHTML = getFullHTML();
+}
+
+function getFullHTML() {
+    return `
+        ${getNavigationHTML()}
+        ${getHeroHTML()}
+        ${getBrandStoryHTML()}
+        ${getStandardsHTML()}
+        ${getContactHTML()}
+        ${getFooterHTML()}
+    `;
+}
+
+// Navigation HTML
+function getNavigationHTML() {
+    return `
+        <nav class="nav" id="navigation">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">PQNQ</div>
+                    <ul class="nav-links" id="navLinks">
+                        <li><a href="#home" class="nav-link">홈</a></li>
+                        <li><a href="#brand-story" class="nav-link">스토리</a></li>
+                        <li><a href="#standards" class="nav-link">기준</a></li>
+                        <li><a href="#contact" class="nav-link">연락처</a></li>
+                    </ul>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    `;
+}
+
+// Hero Section HTML
+function getHeroHTML() {
+    return `
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title brand-title fade-in">PQNQ</h1>
+                    <p class="hero-subtitle brand-subtitle fade-in">Piquenique Bistro</p>
+                    <p class="hero-subtitle brand-subtitle fade-in">1:1:1, 건강한 삶을 위한 가장 정직한 비율.</p>
+                    <div class="hero-concept fade-in">
+                        맛을 위해 건강을 타협하지 않는 '슬로우 쿠킹'
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+// Brand Story HTML
+function getBrandStoryHTML() {
+    return `
+        <section class="section brand-story" id="brand-story">
+            <div class="container">
+                <div class="brand-story-content">
+                    <h2 class="section-title fade-in">'먹는 것'이 곧 '살아가는 것'이기에.</h2>
+                    <div class="brand-story-text body-text fade-in">
+                        <p>식당을 운영하며 저희를 키워내신 어머니의 뒷모습에서 음식의 무게를 배웠습니다.</p>
+                        <br>
+                        <p>프랑스에서 생활하며 배운 음식문화를 바탕으로 마가린과 씨앗 오일을 배제하고, 올리브오일과 풀을 먹고 자란(Grass-fed) 버터와 유제품을 사용합니다.</p>
+                        <br>
+                        <p>저온 조리로 조리과정에서 생기는 독소물질을 최소화합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+// Standards HTML
+function getStandardsHTML() {
+    return `
+        <section class="section standards" id="standards">
+            <div class="container">
+                <h2 class="section-title fade-in">PQNQ의 기준</h2>
+                <div class="standards-grid">
+                    ${getStandardCardHTML("Low Glycemic & Anti-Inflammatory", "혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구.", 0)}
+                    ${getStandardCardHTML("The 1:1:1 Rule", "당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율.", 1)}
+                    ${getStandardCardHTML("Pure & Real Food", "직접 만든 스프와 카레, 정직한 소스와 재료.", 2)}
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+function getStandardCardHTML(title, description, index) {
+    return `
+        <div class="standard-card fade-in" style="animation-delay: ${index * 0.2}s">
+            <h3 class="standard-title">${title}</h3>
+            <p class="standard-description">${description}</p>
+        </div>
+    `;
+}
+
+// Contact HTML
+function getContactHTML() {
+    return `
+        <section class="section contact" id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="contact-title fade-in">Location & Contact</h2>
+                    <div class="contact-address fade-in">
+                        서울특별시 강남구 강남대로48길 6, 1층 (피끄니크비스트로)
+                    </div>
+                    <div class="contact-vision fade-in">
+                        "우리는 더 건강한 미래를 연구합니다. 이제 온라인에서도 PQNQ의 철학을 만나보세요."
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+// Footer HTML
+function getFooterHTML() {
+    return `
+        <footer class="footer">
+            <div class="container">
+                <p class="footer-text">© 2024 PQNQ. All rights reserved.</p>
+            </div>
+        </footer>
+    `;
+}
+
+// Event Listeners
+function setupEventListeners() {
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Smooth scrolling for navigation links
+    const navLinks_elements = document.querySelectorAll('.nav-link');
+    navLinks_elements.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
+// Scroll Effects
+function setupScrollEffects() {
+    const nav = document.getElementById('navigation');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+}
+
+// Fade-in Animations
+function setupFadeInAnimations() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    fadeElements.forEach(function(element) {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'all 1s ease';
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                setTimeout(function() {
+                    entry.target.classList.add('visible');
+                }, 100);
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach(function(element) {
+        observer.observe(element);
+    });
+}
+    </script>
 </body>
 </html>
