@@ -241,6 +241,89 @@ body {
     color: var(--gray-dark);
 }
 
+/* Online Shop Section */
+.online-shop {
+    background: var(--gray-light);
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: var(--primary-white);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    height: 240px;
+    background: linear-gradient(135deg, var(--gray-light) 0%, var(--primary-white) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-placeholder {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-medium);
+    text-align: center;
+    padding: var(--spacing-md);
+}
+
+.product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-black);
+    margin: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
+}
+
+.product-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 200;
+    line-height: 1.6;
+    color: var(--gray-dark);
+    margin: 0 var(--spacing-md) var(--spacing-lg) var(--spacing-md);
+}
+
+.product-btn {
+    background: var(--primary-black);
+    color: var(--primary-white);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 var(--spacing-md) var(--spacing-lg) var(--spacing-md);
+    border-radius: 4px;
+}
+
+.product-btn:hover {
+    background: var(--gray-dark);
+    transform: translateY(-2px);
+}
+
 /* Contact Section */
 .contact {
     background: var(--primary-black);
@@ -397,6 +480,7 @@ body {
                     <ul class="nav-links" id="navLinks">
                         <li><a href="#home" class="nav-link">홈</a></li>
                         <li><a href="#brand-story" class="nav-link">스토리</a></li>
+                        <li><a href="#online-shop" class="nav-link">온라인샵</a></li>
                         <li><a href="#standards" class="nav-link">기준</a></li>
                         <li><a href="#contact" class="nav-link">연락처</a></li>
                     </ul>
@@ -434,6 +518,39 @@ body {
                         <p>프랑스에서 생활하며 배운 음식문화를 바탕으로 마가린과 씨앗 오일을 배제하고, 올리브오일과 풀을 먹고 자란(Grass-fed) 버터와 유제품을 사용합니다.</p>
                         <br>
                         <p>저온 조리로 조리과정에서 생기는 독소물질을 최소화합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Online Shop Section -->
+        <section class="section online-shop" id="online-shop">
+            <div class="container">
+                <h2 class="section-title fade-in">Online Shop</h2>
+                <div class="shop-grid">
+                    <div class="product-card fade-in" style="animation-delay: 0s">
+                        <div class="product-image">
+                            <div class="image-placeholder">시그니처 소스 세트</div>
+                        </div>
+                        <h3 class="product-title">시그니처 소스 세트</h3>
+                        <p class="product-description">홀그레인 머스타드와 냉압착 올리브유로 유화시킨 레드와인 비네그렛 & 신선한 바질 페스토.</p>
+                        <button class="product-btn">Coming Soon</button>
+                    </div>
+                    <div class="product-card fade-in" style="animation-delay: 0.2s">
+                        <div class="product-image">
+                            <div class="image-placeholder">1:1:1 밸런스 카레</div>
+                        </div>
+                        <h3 class="product-title">1:1:1 밸런스 카레</h3>
+                        <p class="product-description">설탕 없이 채소의 단맛을 살린 토마토 카레와 시금치 그린 카레.</p>
+                        <button class="product-btn">Coming Soon</button>
+                    </div>
+                    <div class="product-card fade-in" style="animation-delay: 0.4s">
+                        <div class="product-image">
+                            <div class="image-placeholder">그라스페드 베이커리</div>
+                        </div>
+                        <h3 class="product-title">그라스페드 베이커리</h3>
+                        <p class="product-description">목초 버터와 건강한 곡물로 구워낸 속이 편한 건강빵 시리즈.</p>
+                        <button class="product-btn">구매하기</button>
                     </div>
                 </div>
             </div>
