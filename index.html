@@ -1,668 +1,1402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PQNQ - Piquenique Bistro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PQNQ PIQUENIQUE BISTRO — 좋은 음식, 매일 먹고 싶은 한 끼.">
+  <title>PQNQ — PIQUENIQUE BISTRO</title>
 
-:root {
-    --primary-black: #0a0a0a;
-    --primary-white: #ffffff;
-    --gray-light: #f8f8f8;
-    --gray-medium: #666666;
-    --gray-dark: #333333;
-    --accent: #c9a961;
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 6rem;
-    --spacing-xxl: 8rem;
-}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 200;
-    line-height: 1.8;
-    color: var(--primary-black);
-    background: var(--primary-white);
-    overflow-x: hidden;
-}
+  <style>
+    /* =========================================================
+       PQNQ — SINGLE PAGE HOMEPAGE
+       HTML + CSS + JS in one file
+       Replace .photo-placeholder blocks with real <img> tags.
+       ========================================================= */
 
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-}
+    :root {
+      --bg: #f7f5f0;
+      --paper: #ffffff;
+      --ink: #171717;
+      --muted: #77736b;
+      --line: #d9d5cd;
+      --soft: #ebe7df;
+      --accent: #c9a961;
 
-/* Typography */
-.brand-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: clamp(4rem, 12vw, 12rem);
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-    color: var(--primary-black);
-}
+      --max: 1440px;
+      --gutter: 48px;
 
-.brand-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-weight: 200;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    line-height: 1.6;
-    color: var(--gray-medium);
-    letter-spacing: 0.05em;
-}
-
-.section-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.2;
-    color: var(--primary-black);
-    margin-bottom: var(--spacing-lg);
-}
-
-.body-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 200;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    line-height: 2;
-    color: var(--gray-dark);
-}
-
-.caption-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(0.875rem, 1vw, 1rem);
-    line-height: 1.6;
-    color: var(--gray-medium);
-}
-
-/* Navigation */
-.nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
-    padding: var(--spacing-sm) 0;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(10, 10, 10, 0.05);
-}
-
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--primary-black);
-}
-
-.nav-links {
-    display: flex;
-    gap: var(--spacing-md);
-    list-style: none;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--primary-black);
-    font-size: 0.9rem;
-    font-weight: 300;
-    transition: opacity 0.3s ease;
-    letter-spacing: 0.05em;
-}
-
-.nav-link:hover {
-    opacity: 0.5;
-}
-
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: linear-gradient(135deg, var(--gray-light) 0%, var(--primary-white) 100%);
-    padding: var(--spacing-xxl) 0;
-}
-
-.hero-content {
-    text-align: center;
-    z-index: 2;
-    max-width: 1200px;
-}
-
-.hero-title {
-    margin-bottom: var(--spacing-md);
-}
-
-.hero-subtitle {
-    margin-bottom: var(--spacing-xl);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-concept {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(1rem, 1.5vw, 1.125rem);
-    line-height: 1.6;
-    color: var(--gray-medium);
-    font-style: italic;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-md);
-    border-top: 1px solid var(--gray-medium);
-    border-bottom: 1px solid var(--gray-medium);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Section Styles */
-.section {
-    padding: var(--spacing-xxl) 0;
-}
-
-/* Brand Story Section */
-.brand-story {
-    background: var(--primary-white);
-}
-
-.brand-story-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.brand-story-text {
-    margin-bottom: var(--spacing-lg);
-}
-
-/* Standards Section */
-.standards {
-    background: var(--gray-light);
-}
-
-.standards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.standard-card {
-    background: var(--primary-white);
-    padding: var(--spacing-lg);
-    border-radius: 4px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.standard-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.standard-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    line-height: 1.3;
-    color: var(--primary-black);
-    margin-bottom: var(--spacing-md);
-}
-
-.standard-description {
-    font-family: 'Inter', sans-serif;
-    font-weight: 200;
-    font-size: clamp(0.875rem, 1.2vw, 1rem);
-    line-height: 1.8;
-    color: var(--gray-dark);
-}
-
-/* Online Shop Section */
-.online-shop {
-    background: var(--gray-light);
-}
-
-.shop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--spacing-lg);
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.product-card {
-    background: var(--primary-white);
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-}
-
-.product-image {
-    height: 240px;
-    background: linear-gradient(135deg, var(--gray-light) 0%, var(--primary-white) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.image-placeholder {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--gray-medium);
-    text-align: center;
-    padding: var(--spacing-md);
-}
-
-.product-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-black);
-    margin: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
-}
-
-.product-description {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 200;
-    line-height: 1.6;
-    color: var(--gray-dark);
-    margin: 0 var(--spacing-md) var(--spacing-lg) var(--spacing-md);
-}
-
-.product-btn {
-    background: var(--primary-black);
-    color: var(--primary-white);
-    border: none;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 var(--spacing-md) var(--spacing-lg) var(--spacing-md);
-    border-radius: 4px;
-}
-
-.product-btn:hover {
-    background: var(--gray-dark);
-    transform: translateY(-2px);
-}
-
-/* Contact Section */
-.contact {
-    background: var(--primary-black);
-    color: var(--primary-white);
-    text-align: center;
-}
-
-.contact-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.contact-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.2;
-    color: var(--primary-white);
-    margin-bottom: var(--spacing-lg);
-}
-
-.contact-address {
-    font-family: 'Inter', sans-serif;
-    font-weight: 200;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    line-height: 1.8;
-    color: var(--primary-white);
-    margin-bottom: var(--spacing-lg);
-}
-
-.contact-vision {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(0.875rem, 1.2vw, 1rem);
-    line-height: 1.6;
-    color: var(--gray-medium);
-    font-style: italic;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: var(--spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Footer */
-.footer {
-    background: var(--primary-black);
-    color: var(--primary-white);
-    text-align: center;
-    padding: var(--spacing-lg) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 200;
-    opacity: 0.7;
-    letter-spacing: 0.05em;
-}
-
-/* Mobile Menu */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--spacing-xs);
-}
-
-.mobile-menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 1px;
-    background: var(--primary-black);
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-/* Animations */
-.fade-in {
-    opacity: 1;
-    transform: translateY(30px);
-    transition: all 1s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: var(--primary-white);
-        flex-direction: column;
-        padding: var(--spacing-md);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+      --sans: "Inter", Arial, sans-serif;
     }
 
-    .nav-links.active {
-        display: flex;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .mobile-menu-toggle {
-        display: block;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .hero {
-        padding: var(--spacing-lg) var(--spacing-md);
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      width: min(calc(100% - var(--gutter) * 2), var(--max));
+      margin: 0 auto;
     }
 
     .section {
-        padding: var(--spacing-lg) var(--spacing-md);
+      padding: 140px 0;
+      border-bottom: 1px solid var(--line);
     }
 
-    .standards-grid {
+    .eyebrow {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .18em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+    }
+
+    .section-title {
+      margin-top: 18px;
+      font-size: clamp(48px, 5.7vw, 84px);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .body-copy {
+      color: #5f5b54;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 21px;
+      border: 1px solid var(--ink);
+      font-size: 11px;
+      letter-spacing: .1em;
+      transition: .25s ease;
+    }
+
+    .btn:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn--dark {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn--dark:hover {
+      background: #3b3b3b;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      background: rgba(247,245,240,.9);
+      border-bottom: 1px solid rgba(217,213,205,.65);
+      backdrop-filter: blur(16px);
+      transition: background .25s ease;
+    }
+
+    .header.is-scrolled {
+      background: rgba(255,255,255,.96);
+    }
+
+    .header__inner {
+      width: min(calc(100% - var(--gutter) * 2), var(--max));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 25px;
+      letter-spacing: .08em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav a {
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: opacity .2s ease;
+    }
+
+    .nav a:hover {
+      opacity: .45;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--ink);
+      margin: 5px auto;
+      transition: .25s ease;
+    }
+
+    /* =========================================================
+       PHOTO PLACEHOLDER
+       ========================================================= */
+
+    .photo {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.32), transparent 52%),
+        #d9d3c8;
+    }
+
+    .photo::before {
+      content: "PHOTO";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgba(23,23,23,.38);
+      font-size: 10px;
+      letter-spacing: .22em;
+      z-index: 0;
+    }
+
+    .photo__label {
+      position: absolute;
+      z-index: 2;
+      left: 14px;
+      bottom: 12px;
+      padding: 5px 8px;
+      background: rgba(255,255,255,.82);
+      color: #555;
+      font-size: 9px;
+      letter-spacing: .08em;
+    }
+
+    /*
+      REAL IMAGE EXAMPLE:
+
+      <div class="photo">
+        <img src="images/hero.jpg" alt="PQNQ 음식">
+      </div>
+
+      The image automatically sits above the placeholder.
+    */
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 76px;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero__copy {
+      padding: 50px 0 70px;
+    }
+
+    .hero__brand {
+      margin-top: 16px;
+      font-family: var(--serif);
+      font-size: clamp(86px, 11vw, 175px);
+      line-height: .78;
+      letter-spacing: -.07em;
+    }
+
+    .hero__category {
+      margin-top: 38px;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .hero__headline {
+      margin-top: 15px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+    }
+
+    .hero__photo {
+      height: min(78vh, 760px);
+      min-height: 540px;
+    }
+
+    .hero__caption {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .08em;
+    }
+
+    /* =========================================================
+       MENU
+       ========================================================= */
+
+    .menu__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+
+    .menu__intro {
+      width: min(100%, 500px);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .menu-card:nth-child(2) {
+      margin-top: 70px;
+    }
+
+    .menu-card:nth-child(3) {
+      margin-top: 140px;
+    }
+
+    .menu-card__photo {
+      aspect-ratio: 1 / 1.04;
+    }
+
+    .menu-card__info {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 0 6px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-card__name {
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .menu-card__meta {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-align: right;
+    }
+
+    /* =========================================================
+       LUNCH BOX
+       ========================================================= */
+
+    .lunch {
+      background: #e9e4da;
+    }
+
+    .lunch__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 680px;
+    }
+
+    .lunch__copy {
+      padding: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lunch__title {
+      margin-top: 17px;
+      font-size: clamp(52px, 6vw, 92px);
+      line-height: .94;
+      letter-spacing: -.05em;
+    }
+
+    .lunch__description {
+      max-width: 460px;
+      margin-top: 27px;
+      color: #625e56;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .lunch__spec {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 38px;
+      border-top: 1px solid #c9c3b8;
+    }
+
+    .lunch__spec-item {
+      padding: 13px 0;
+      border-bottom: 1px solid #c9c3b8;
+      font-size: 12px;
+    }
+
+    .lunch__spec-item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #77736b;
+      font-size: 9px;
+      letter-spacing: .12em;
+    }
+
+    .lunch__price {
+      margin-top: 28px;
+      font-family: var(--serif);
+      font-size: 33px;
+    }
+
+    .lunch__photo {
+      min-height: 680px;
+    }
+
+    /* =========================================================
+       CATERING
+       ========================================================= */
+
+    .catering__grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 90px;
+      align-items: center;
+    }
+
+    .catering__photo {
+      aspect-ratio: 1.35 / 1;
+    }
+
+    .people {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 30px;
+    }
+
+    .people span {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    /* =========================================================
+       STANDARDS
+       ========================================================= */
+
+    .standards__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 60px;
+      border-top: 1px solid var(--line);
+    }
+
+    .standard {
+      min-height: 250px;
+      padding: 28px 24px 20px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .standard + .standard {
+      padding-left: 24px;
+    }
+
+    .standard:last-child {
+      border-right: 0;
+    }
+
+    .standard__number {
+      font-family: var(--serif);
+      font-size: 19px;
+    }
+
+    .standard h3 {
+      margin-top: 58px;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .standard p {
+      max-width: 310px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    /* =========================================================
+       ABOUT
+       ========================================================= */
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 100px;
+    }
+
+    .about__lead {
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+    }
+
+    .about__small {
+      max-width: 550px;
+      margin-top: 38px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* =========================================================
+       LOCATION
+       ========================================================= */
+
+    .location {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: stretch;
+    }
+
+    .location__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .location__name {
+      margin-top: 24px;
+      font-family: var(--serif);
+      font-size: 29px;
+    }
+
+    .location__address {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .location__map {
+      min-height: 390px;
+      width: 100%;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    #kakao-map {
+      width: 100%;
+      min-height: 390px;
+    }
+
+    .map-fallback {
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      text-align: center;
+      background: #f2f1ed;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .footer {
+      padding: 70px 0 100px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .footer__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer__logo {
+      font-family: var(--serif);
+      font-size: 65px;
+      line-height: .9;
+      letter-spacing: -.05em;
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      font-size: 10px;
+      letter-spacing: .1em;
+    }
+
+    .footer__links a {
+      opacity: .8;
+    }
+
+    .footer__links a:hover {
+      opacity: 1;
+    }
+
+    .footer__copy {
+      margin-top: 75px;
+      color: rgba(255,255,255,.5);
+      font-size: 9px;
+      letter-spacing: .08em;
+    }
+
+    /* =========================================================
+       MOBILE BOTTOM ACTION
+       ========================================================= */
+
+    .mobile-actions {
+      display: none;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 900px) {
+      :root {
+        --gutter: 32px;
+      }
+
+      .section {
+        padding: 95px 0;
+      }
+
+      .header {
+        height: 64px;
+      }
+
+      .header__inner {
+        width: min(calc(100% - var(--gutter) * 2), var(--max));
+      }
+
+      .nav {
+        display: none;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        padding: 24px var(--gutter);
+        flex-direction: column;
+        gap: 19px;
+        background: rgba(247,245,240,.98);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav.is-open {
+        display: flex;
+      }
+
+      .nav a {
+        font-size: 12px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .menu-toggle.is-open span:first-child {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .menu-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.is-open span:last-child {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .hero {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .hero__copy {
+        width: 100%;
+        padding: 95px 0 48px;
+      }
+
+      .hero__brand {
+        font-size: 25vw;
+      }
+
+      .hero__category {
+        margin-top: 30px;
+        font-size: 9px;
+      }
+
+      .hero__headline {
+        font-size: 27px;
+      }
+
+      .hero__photo {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 4 / 5;
+      }
+
+      .menu__head {
+        display: block;
+        margin-bottom: 40px;
+      }
+
+      .menu__intro {
+        margin-top: 28px;
+      }
+
+      .menu-grid {
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
+        gap: 43px;
+      }
+
+      .menu-card:nth-child(2),
+      .menu-card:nth-child(3) {
+        margin-top: 0;
+      }
+
+      .menu-card__photo {
+        aspect-ratio: 1 / 1;
+      }
+
+      .lunch__grid {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      .lunch__photo {
+        min-height: 0;
+        aspect-ratio: 1 / 1.05;
+        order: -1;
+      }
+
+      .lunch__copy {
+        padding: 54px 25px 65px;
+      }
+
+      .lunch__title {
+        font-size: 57px;
+      }
+
+      .catering__grid {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .standards__grid {
+        grid-template-columns: 1fr;
+        margin-top: 42px;
+      }
+
+      .standard {
+        min-height: 0;
+        padding: 25px 0 35px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .standard + .standard {
+        padding-left: 0;
+      }
+
+      .standard:last-child {
+        border-bottom: 0;
+      }
+
+      .standard h3 {
+        margin-top: 35px;
+      }
+
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .location {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .location__map {
+        min-height: 300px;
+      }
+
+      .footer__top {
+        display: block;
+      }
+
+      .footer__links {
+        margin-top: 35px;
+      }
+
+      .mobile-actions {
+        position: fixed;
+        z-index: 90;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background: rgba(255,255,255,.95);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid var(--line);
+      }
+
+      .mobile-actions a {
+        padding: 15px 4px;
+        border-right: 1px solid var(--line);
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: .06em;
+      }
+
+      .mobile-actions a:last-child {
+        border-right: 0;
+      }
     }
 
-    .standard-card {
-        padding: var(--spacing-md);
-    }
-}
+    @media (max-width: 480px) {
+      :root {
+        --gutter: 20px;
+      }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 0 var(--spacing-md);
-    }
+      .section {
+        padding: 82px 0;
+      }
 
-    .brand-title {
-        font-size: clamp(3rem, 10vw, 6rem);
-    }
+      .section-title {
+        font-size: 45px;
+      }
 
-    .hero-concept {
-        padding: var(--spacing-sm);
+      .hero__headline {
+        font-size: 25px;
+      }
+
+      .hero__category {
+        letter-spacing: .13em;
+      }
+
+      .lunch__copy {
+        padding: 45px 20px 60px;
+      }
+
+      .lunch__title {
+        font-size: 51px;
+      }
+
+      .about__lead {
+        font-size: 33px;
+      }
+
+      .footer__logo {
+        font-size: 50px;
+      }
     }
-}
-    </style>
+  </style>
 </head>
+
 <body>
-    <div id="app">
-        <!-- Navigation -->
-        <nav class="nav" id="navigation">
-            <div class="container">
-                <div class="nav-content">
-                    <div class="logo">PQNQ</div>
-                    <ul class="nav-links" id="navLinks">
-                        <li><a href="#home" class="nav-link">홈</a></li>
-                        <li><a href="#brand-story" class="nav-link">스토리</a></li>
-                        <li><a href="#online-shop" class="nav-link">온라인샵</a></li>
-                        <li><a href="#standards" class="nav-link">기준</a></li>
-                        <li><a href="#contact" class="nav-link">연락처</a></li>
-                    </ul>
-                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
 
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title brand-title fade-in">PQNQ</h1>
-                    <p class="hero-subtitle brand-subtitle fade-in">Piquenique Bistro</p>
-                    <p class="hero-subtitle brand-subtitle fade-in">일상에서 부담 없이 즐길 수 있는 식사의 균형을 제안합니다.</p>
-                    <div class="hero-concept fade-in">
-                        맛과 재료의 균형을 지키기 위해, 조급하지 않은 슬로우 쿠킹을 지향합니다.
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a class="logo" href="#home" aria-label="PQNQ home">PQNQ</a>
 
-        <!-- Brand Story Section -->
-        <section class="section brand-story" id="brand-story">
-            <div class="container">
-                <div class="brand-story-content">
-                    <h2 class="section-title fade-in">건강을 생각하는 사람들에게, 과하지 않은 한 끼를 전하고 싶습니다.</h2>
-                    <div class="brand-story-text body-text fade-in">
-                        <p>마가린과 씨앗 오일 대신 올리브오일과 풀을 먹고 자란 버터·유제품을 주로 사용하며, 저온 조리로 재료가 가진 맛과 식감을 그대로 살리고자 합니다.</p>
-                        <br>
-                        <p>저온 조리로 재료에 과도한 부담을 줄이고, 보다 편안한 한 끼를 지향합니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <a href="#menu">MENU</a>
+        <a href="#lunch">LUNCH BOX</a>
+        <a href="#catering">CATERING</a>
+        <a href="#about">ABOUT</a>
+        <a href="#location">LOCATION</a>
+      </nav>
 
-        <!-- Online Shop Section -->
-        <section class="section online-shop" id="online-shop">
-            <div class="container">
-                <h2 class="section-title fade-in">Online Shop</h2>
-                <div class="shop-grid">
-                    <div class="product-card fade-in" style="animation-delay: 0s">
-                        <div class="product-image">
-                            <div class="image-placeholder">시그니처 소스 세트</div>
-                        </div>
-                        <h3 class="product-title">시그니처 소스 세트</h3>
-                        <p class="product-description">홀그레인 머스타드와 냉압착 올리브유로 유화시킨 레드와인 비네그렛 & 신선한 바질 페스토.</p>
-                        <button class="product-btn">Coming Soon</button>
-                    </div>
-                    <div class="product-card fade-in" style="animation-delay: 0.2s">
-                        <div class="product-image">
-                            <div class="image-placeholder">1:1:1 밸런스 카레</div>
-                        </div>
-                        <h3 class="product-title">1:1:1 밸런스 카레</h3>
-                        <p class="product-description">설탕 없이 채소의 단맛을 살린 토마토 카레와 시금치 그린 카레.</p>
-                        <button class="product-btn">Coming Soon</button>
-                    </div>
-                    <div class="product-card fade-in" style="animation-delay: 0.4s">
-                        <div class="product-image">
-                            <div class="image-placeholder">그라스페드 베이커리</div>
-                        </div>
-                        <h3 class="product-title">그라스페드 베이커리</h3>
-                        <p class="product-description">목초 버터와 건강한 곡물로 구워낸 속이 편한 건강빵 시리즈.</p>
-                        <button class="product-btn">구매하기</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Standards Section -->
-        <section class="section standards" id="standards">
-            <div class="container">
-                <h2 class="section-title fade-in">PQNQ의 기준</h2>
-                <div class="standards-grid">
-                    <div class="standard-card fade-in" style="animation-delay: 0s">
-                        <h3 class="standard-title">Low Glycemic & Anti-Inflammatory</h3>
-                        <p class="standard-description">혈당을 천천히 올리는 쿠스쿠스와 알룰로스 사용, 항염 작용을 돕는 심혈관 친화적 식재료 연구.</p>
-                    </div>
-                    <div class="standard-card fade-in" style="animation-delay: 0.2s">
-                        <h3 class="standard-title">The 1:1:1 Rule</h3>
-                        <p class="standard-description">당뇨 환자 식단에서 착안한 곡물, 채소, 단백질의 황금 비율.</p>
-                    </div>
-                    <div class="standard-card fade-in" style="animation-delay: 0.4s">
-                        <h3 class="standard-title">Pure & Real Food</h3>
-                        <p class="standard-description">직접 만든 스프와 카레, 정직한 소스와 재료.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="section contact" id="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <h2 class="contact-title fade-in">Location & Contact</h2>
-                    <div class="contact-address fade-in">
-                        서울특별시 강남구 강남대로48길 6, 1층 (피끄니크비스트로)
-                    </div>
-                    <div class="contact-vision fade-in">
-                        "우리는 더 건강한 미래를 연구합니다. 이제 온라인에서도 PQNQ의 철학을 만나보세요."
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <p class="footer-text">© 2024 PQNQ. All rights reserved.</p>
-            </div>
-        </footer>
+      <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    
-    <script>
-// PQNQ Restaurant - Minimal JavaScript for Animations Only
-document.addEventListener('DOMContentLoaded', function() {
-    setupEventListeners();
-    setupScrollEffects();
-    setupFadeInAnimations();
-});
+  </header>
 
-// Event Listeners
-function setupEventListeners() {
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const navLinks = document.getElementById('navLinks');
 
-    if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-    }
+  <main>
 
-    // Smooth scrolling for navigation links
-    const navLinks_elements = document.querySelectorAll('.nav-link');
-    navLinks_elements.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+    <!-- =====================================================
+         01 HERO
+         ===================================================== -->
+    <section class="hero container" id="home">
+      <div class="hero__copy">
+        <div class="eyebrow">PIQUENIQUE BISTRO · SEOUL</div>
+
+        <h1 class="hero__brand">PQNQ</h1>
+
+        <div class="hero__category">
+          BISTRO · KOREAN · LUNCH BOX · CATERING
+        </div>
+
+        <p class="hero__headline">
+          좋은 음식,<br>
+          매일 먹고 싶은 한 끼.
+        </p>
+
+        <div class="btn-row">
+          <a class="btn btn--dark" href="#menu">MENU</a>
+          <a class="btn" href="#lunch">LUNCH BOX</a>
+        </div>
+      </div>
+
+      <div>
+        <!-- PHOTO: HERO / 권장 4:5 -->
+        <div class="photo hero__photo">
+         
+          <img src="images/hero.jpg" alt="피끄니크 비스트로 음식">
+         
+          <span class="photo__label">HERO PHOTO · 4:5</span>
+        </div>
+
+        <div class="hero__caption">
+          <span>PIQUENIQUE BISTRO</span>
+          <span>GOOD FOOD, GOOD BALANCE.</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         02 MENU
+         ===================================================== -->
+    <section class="section" id="menu">
+      <div class="container">
+
+        <div class="menu__head">
+          <div>
+            <div class="eyebrow">01 / MENU</div>
+            <h2 class="section-title">SIGNATURE<br>DISHES</h2>
+          </div>
+
+          <p class="menu__intro body-copy">
+            샐러드와 그레인볼에서 시작해,
+            이제는 한국 음식과 따뜻한 한 끼까지.
+            PQNQ가 잘하는 방식으로 다시 만듭니다.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+
+          <article class="menu-card">
+            <div class="photo menu-card__photo">
+              <img src="images/menu-chicken.jpg" alt="꽈리고추 데리야끼 치킨">
+            </div>
+
+            <div class="menu-card__info">
+              <div class="menu-card__name">꽈리고추 데리야끼 치킨</div>
+              <div class="menu-card__meta">WARM BOWL</div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="photo menu-card__photo">
+              <img src="images/menu-calamari.jpg" alt="오징어 비빔볼">
+            </div>
+
+            <div class="menu-card__info">
+              <div class="menu-card__name">오징어 비빔볼</div>
+              <div class="menu-card__meta">CALAMARI BIBIMBOWL</div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="photo menu-card__photo">
+              <img src="images/menu-salmon.jpg" alt="생연어 아보카도 그레인볼"> 
+            </div>
+
+            <div class="menu-card__info">
+              <div class="menu-card__name">생연어 아보카도 그레인볼</div>
+              <div class="menu-card__meta">GRAIN BOWL</div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="btn-row">
+          <a class="btn" href="#">전체 메뉴 보기 →</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         03 LUNCH BOX
+         ===================================================== -->
+    <section class="section lunch" id="lunch">
+      <div class="container">
+
+        <div class="lunch__grid">
+
+          <div class="lunch__copy">
+            <div class="eyebrow">02 / LUNCH BOX</div>
+
+            <h2 class="lunch__title">
+              회사 점심도<br>
+              제대로 한 끼.
+            </h2>
+
+            <p class="lunch__description">
+              매장에서 직접 만드는 따뜻한 메인과 밥,
+              매일 바뀌는 반찬과 샐러드, 국까지.
+              익숙하지만 조금 더 좋은 점심을 만듭니다.
+            </p>
+
+            <div class="lunch__spec">
+              <div class="lunch__spec-item">
+                <strong>MAIN</strong>
+                오늘의 메인
+              </div>
+              <div class="lunch__spec-item">
+                <strong>RICE</strong>
+                곡물밥
+              </div>
+              <div class="lunch__spec-item">
+                <strong>SIDES</strong>
+                4가지 반찬
+              </div>
+              <div class="lunch__spec-item">
+                <strong>SALAD</strong>
+                신선한 샐러드
+              </div>
+              <div class="lunch__spec-item">
+                <strong>SOUP</strong>
+                오늘의 국
+              </div>
+              <div class="lunch__spec-item">
+                <strong>PRICE</strong>
+                13,500원부터
+              </div>
+            </div>
+
+            <div class="lunch__price">13,500 KRW</div>
+
+            <div class="btn-row">
+              <a class="btn btn--dark" href="#location">포장 주문</a>
+              <a class="btn" href="#catering">단체주문 문의</a>
+            </div>
+          </div>
+
+          <!-- PHOTO: LUNCH BOX / 권장 1:1 -->
+          <div class="photo lunch__photo">
+            <img src="images/lunchbox.jpg" alt="PQNQ 런치박스">
+            <span class="photo__label">LUNCH BOX PHOTO · 1:1</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         04 CATERING
+         ===================================================== -->
+    <section class="section" id="catering">
+      <div class="container">
+
+        <div class="catering__grid">
+
+          <!-- PHOTO: GROUP / 권장 4:3 -->
+          <div class="photo catering__photo">
+             <img src="images/catering.jpg" alt="PQNQ 단체 도시락">
+            <span class="photo__label">GROUP PHOTO · 4:3</span>
+          </div>
+
+          <div>
+            <div class="eyebrow">03 / CATERING</div>
+
+            <h2 class="section-title">
+              ONE LUNCH<br>
+              → GROUP ORDER
+            </h2>
+
+            <p class="body-copy" style="max-width:520px;margin-top:26px;">
+              사무실 점심, 회의, 워크숍, 행사까지.
+              인원과 예산에 맞춰 단체 주문을 준비합니다.
+            </p>
+
+            <div class="people">
+              <span>5+</span>
+              <span>10+</span>
+              <span>20+</span>
+              <span>50+</span>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn btn--dark" href="#location">단체주문 문의</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         05 STANDARDS
+         ===================================================== -->
+    <section class="section" id="standards">
+      <div class="container">
+
+        <div class="eyebrow">04 / PQNQ'S STANDARD</div>
+
+        <h2 class="section-title">
+          GOOD FOOD<br>
+          IS SIMPLE.
+        </h2>
+
+        <div class="standards__grid">
+
+          <article class="standard">
+            <div class="standard__number">01</div>
+            <h3>GOOD INGREDIENTS</h3>
+            <p>
+              좋은 재료를 고르고,
+              특히 음식의 기본이 되는 오일과 소스의 품질을 중요하게 생각합니다.
+            </p>
+          </article>
+
+          <article class="standard">
+            <div class="standard__number">02</div>
+            <h3>BALANCED FLAVOR</h3>
+            <p>
+              과하게 달거나 자극적인 맛보다
+              매일 먹어도 질리지 않는 균형 잡힌 맛을 지향합니다.
+            </p>
+          </article>
+
+          <article class="standard">
+            <div class="standard__number">03</div>
+            <h3>PURE & REAL FOOD</h3>
+            <p>
+              직접 만든 스프와 카레, 정직한 소스와 재료를 통해
+              재료 본연의 맛을 살립니다.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         06 ABOUT
+         ===================================================== -->
+    <section class="section" id="about">
+      <div class="container">
+
+        <div class="about__grid">
+
+          <div>
+            <div class="eyebrow">05 / ABOUT PQNQ</div>
+          </div>
+
+          <div>
+            <div class="about__lead">
+              좋은 음식은<br>
+              복잡할 필요가 없습니다.<br><br>
+
+              좋은 재료를 고르고,<br>
+              제대로 조리하고,<br>
+              매일 먹을 수 있는 음식으로 만듭니다.
+            </div>
+
+            <p class="about__small">
+              2010년 서울에서 시작한 PIQUENIQUE BISTRO.
+              한국에서 자란 음식의 감각과 프랑스에서 경험한 식문화를 바탕으로
+              PQNQ만의 한 끼를 만들어갑니다.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         07 LOCATION
+         ===================================================== -->
+    <section class="section" id="location">
+      <div class="container">
+
+        <div class="location">
+
+          <div class="location__info">
+            <div class="eyebrow">06 / LOCATION</div>
+
+            <h2 class="section-title">
+              COME<br>
+              VISIT US.
+            </h2>
+
+            <div class="location__name">
+              PIQUENIQUE BISTRO
+            </div>
+
+            <div class="location__address">
+              서울특별시 강남구 강남대로48길 6, 1층 101호<br>
+              (피끄니크 비스트로)
+            </div>
+
+            <div class="btn-row">
+              <a class="btn btn--dark"
+                 href="https://map.naver.com/p/search/%ED%94%BC%EB%81%84%EB%8B%88%ED%81%AC%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C"
+                 target="_blank" rel="noopener noreferrer">네이버 지도</a>
+              <a class="btn"
+                 href="https://map.kakao.com/?q=%ED%94%BC%EB%81%84%EB%8B%88%ED%81%AC%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C"
+                 target="_blank" rel="noopener noreferrer">카카오맵</a>
+            </div>
+          </div>
+
+          <div class="location__map">
+            <div id="kakao-map" aria-label="피끄니크 비스트로 카카오 지도"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer__top">
+        <div class="footer__logo">PQNQ</div>
+
+        <div class="footer__links">
+          <a href="#menu">MENU</a>
+          <a href="#lunch">LUNCH BOX</a>
+          <a href="#catering">CATERING</a>
+          <a href="#about">ABOUT</a>
+          <a href="#location">LOCATION</a>
+        </div>
+      </div>
+
+      <div class="footer__copy">
+        © 2010–2026 PIQUENIQUE BISTRO. ALL RIGHTS RESERVED.
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Mobile conversion bar -->
+  <div class="mobile-actions">
+    <a href="#menu">메뉴</a>
+    <a href="#lunch">포장주문</a>
+    <a href="#catering">단체주문</a>
+  </div>
+
+
+
+  <!-- Kakao Maps JavaScript API -->
+  <!--
+    1) https://developers.kakao.com 에서 앱을 생성합니다.
+    2) 플랫폼 > Web에 https://www.pqnq.kr 도메인을 등록합니다.
+    3) 아래 KAKAO_JAVASCRIPT_KEY 값을 발급받은 JavaScript 키로 교체합니다.
+  -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=733f659f988109f91b21ad3472e12208"></script>
+<script>
+    (function () {
+      const container = document.getElementById('kakao-map');
+      const lat = 37.486650503641;
+      const lng = 127.03371982894;
+
+      function showMapFallback(message) {
+        if (!container) return;
+        container.innerHTML = '<div class="map-fallback">' + message + '</div>';
+      }
+
+      if (!container) return;
+
+      if (typeof kakao === 'undefined' || !kakao.maps) {
+        showMapFallback('카카오 지도 API 키를 등록하면<br>이곳에 매장 지도가 표시됩니다.');
+        return;
+      }
+
+      const mapOption = {
+        center: new kakao.maps.LatLng(lat, lng),
+        level: 3
+      };
+
+      const map = new kakao.maps.Map(container, mapOption);
+      const position = new kakao.maps.LatLng(lat, lng);
+
+      const marker = new kakao.maps.Marker({
+        position: position
+      });
+      marker.setMap(map);
+
+      const infoWindow = new kakao.maps.InfoWindow({
+        position: position,
+        content: '<div style="padding:9px 12px;font-size:13px;white-space:nowrap;">PIQUENIQUE BISTRO</div>'
+      });
+      infoWindow.open(map, marker);
+
+      window.addEventListener('resize', function () {
+        map.relayout();
+        map.setCenter(position);
+      });
+    })();
+  </script>
+
+  <script>
+    /* =========================================================
+       PQNQ — MINIMAL JAVASCRIPT
+       ========================================================= */
+
+    const header = document.getElementById("header");
+    const menu = document.getElementById("nav");
+    const toggle = document.getElementById("menuToggle");
+
+    // Header background on scroll
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 30);
     });
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-        }
+    // Mobile navigation
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("menu-open", open);
     });
-}
 
-// Scroll Effects
-function setupScrollEffects() {
-    const nav = document.getElementById('navigation');
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
+    // Close mobile menu after navigation
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      });
     });
-}
 
-// Fade-in Animations - Disabled to ensure text visibility
-function setupFadeInAnimations() {
-    // All text is now visible by default - no hiding animations
-    console.log('Animations disabled - text is always visible');
-}
-    </script>
+    // Close when resizing back to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        menu.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      }
+    });
+  </script>
+
 </body>
 </html>
