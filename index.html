@@ -1320,80 +1320,110 @@
   </div>
 
 
-<!-- Kakao Maps JavaScript API -->
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=733f659f988109f91b21ad3472e12208&autoload=false"></script>
 
-<script>
-(function () {
+  <!-- Kakao Maps JavaScript API -->
+  <script
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=733f659f988109f91b21ad3472e12208&autoload=false"
+    onerror="window.__kakaoMapSdkError = true;"
+  ></script>
+  <script>
+    (function () {
+      const container = document.getElementById('kakao-map');
+      const lat = 37.486650503641;
+      const lng = 127.03371982894;
 
-  const container = document.getElementById('kakao-map');
+      function showMapFallback(message) {
+        if (!container) return;
+        container.innerHTML = '<div class="map-fallback">' + message + '</div>';
+      }
 
-  if (!container) {
-    console.error('PQNQ: #kakao-map 요소를 찾을 수 없습니다.');
-    return;
-  }
+      if (!container) {
+        console.error('PQNQ: #kakao-map 요소를 찾을 수 없습니다.');
+        return;
+      }
 
-  const lat = 37.486650503641;
-  const lng = 127.03371982894;
+      if (window.__kakaoMapSdkError || typeof kakao === 'undefined' || !kakao.maps) {
+        showMapFallback('카카오 지도를 불러오지 못했습니다.<br>카카오 JavaScript SDK 설정을 확인해주세요.');
+        console.error('PQNQ: Kakao Maps SDK 로드 실패');
+        return;
+      }
 
-  // 카카오 지도 SDK가 정상적으로 로드된 경우
-  if (
-    typeof kakao === 'undefined' ||
-    !kakao.maps ||
-    typeof kakao.maps.load !== 'function'
-  ) {
-    container.innerHTML = `
-      <div class="map-fallback">
-        카카오 지도를 불러오지 못했습니다.<br>
-        카카오 개발자센터의 JavaScript SDK 도메인 설정을 확인해주세요.
-      </div>
-    `;
-    console.error('PQNQ: Kakao Maps SDK 로드 실패');
-    return;
-  }
+      if (typeof kakao.maps.load !== 'function') {
+        showMapFallback('카카오 지도를 초기화하지 못했습니다.<br>페이지를 새로고침해 주세요.');
+        console.error('PQNQ: kakao.maps.load 함수를 찾을 수 없습니다.');
+        return;
+      }
 
-  kakao.maps.load(function () {
+      kakao.maps.load(function () {
+        const position = new kakao.maps.LatLng(lat, lng);
 
-    const position = new kakao.maps.LatLng(lat, lng);
+        const map = new kakao.maps.Map(container, {
+          center: position,
+          level: 3
+        });
 
-    const map = new kakao.maps.Map(container, {
-      center: position,
-      level: 3
+        const marker = new kakao.maps.Marker({
+          map: map,
+          position: position
+        });
+
+        const infoWindow = new kakao.maps.InfoWindow({
+          position: position,
+          content: '<div style="padding:9px 12px;font-size:13px;line-height:1.4;white-space:nowrap;"><strong>PIQUENIQUE BISTRO</strong></div>'
+        });
+
+        infoWindow.open(map, marker);
+
+        window.addEventListener('resize', function () {
+          map.relayout();
+          map.setCenter(position);
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    /* =========================================================
+       PQNQ — MINIMAL JAVASCRIPT
+       ========================================================= */
+
+    const header = document.getElementById("header");
+    const menu = document.getElementById("nav");
+    const toggle = document.getElementById("menuToggle");
+
+    // Header background on scroll
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 30);
     });
 
-    // 매장 마커
-    const marker = new kakao.maps.Marker({
-      map: map,
-      position: position
+    // Mobile navigation
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("is-open");
+      toggle.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("menu-open", open);
     });
 
-    // 매장명
-    const infoWindow = new kakao.maps.InfoWindow({
-      position: position,
-      content: `
-        <div style="
-          padding:9px 12px;
-          font-size:13px;
-          line-height:1.4;
-          white-space:nowrap;
-        ">
-          <strong>PIQUENIQUE BISTRO</strong>
-        </div>
-      `
+    // Close mobile menu after navigation
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      });
     });
 
-    infoWindow.open(map, marker);
-
-    // 반응형 대응
-    window.addEventListener('resize', function () {
-      map.relayout();
-      map.setCenter(position);
+    // Close when resizing back to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        menu.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      }
     });
-
-  });
-
-})();
-</script>
+  </script>
 
 </body>
 </html>
