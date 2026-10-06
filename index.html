@@ -628,8 +628,19 @@
       opacity: 1;
     }
 
+    .footer__business {
+      margin-top: 45px;
+      color: rgba(255,255,255,.68);
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    .footer__business a {
+      color: inherit;
+    }
+
     .footer__copy {
-      margin-top: 75px;
+      margin-top: 35px;
       color: rgba(255,255,255,.5);
       font-size: 9px;
       letter-spacing: .08em;
@@ -947,9 +958,9 @@
       <div>
         <!-- PHOTO: HERO / 권장 4:5 -->
         <div class="photo hero__photo">
-         
+          <!--
           <img src="images/hero.jpg" alt="피끄니크 비스트로 음식">
-         
+          -->
           <span class="photo__label">HERO PHOTO · 4:5</span>
         </div>
 
@@ -984,7 +995,7 @@
 
           <article class="menu-card">
             <div class="photo menu-card__photo">
-              <img src="images/menu-chicken.jpg" alt="꽈리고추 데리야끼 치킨">
+              <!-- <img src="images/menu-chicken.jpg" alt="꽈리고추 데리야끼 치킨"> -->
             </div>
 
             <div class="menu-card__info">
@@ -995,7 +1006,7 @@
 
           <article class="menu-card">
             <div class="photo menu-card__photo">
-              <img src="images/menu-calamari.jpg" alt="오징어 비빔볼">
+              <!-- <img src="images/menu-calamari.jpg" alt="오징어 비빔볼"> -->
             </div>
 
             <div class="menu-card__info">
@@ -1006,7 +1017,7 @@
 
           <article class="menu-card">
             <div class="photo menu-card__photo">
-              <img src="images/menu-salmon.jpg" alt="생연어 아보카도 그레인볼"> 
+              <!-- <img src="images/menu-salmon.jpg" alt="생연어 아보카도 그레인볼"> -->
             </div>
 
             <div class="menu-card__info">
@@ -1084,7 +1095,7 @@
 
           <!-- PHOTO: LUNCH BOX / 권장 1:1 -->
           <div class="photo lunch__photo">
-            <img src="images/lunchbox.jpg" alt="PQNQ 런치박스">
+            <!-- <img src="images/lunchbox.jpg" alt="PQNQ 런치박스"> -->
             <span class="photo__label">LUNCH BOX PHOTO · 1:1</span>
           </div>
 
@@ -1104,7 +1115,7 @@
 
           <!-- PHOTO: GROUP / 권장 4:3 -->
           <div class="photo catering__photo">
-             <img src="images/catering.jpg" alt="PQNQ 단체 도시락">
+            <!-- <img src="images/catering.jpg" alt="PQNQ 단체 도시락"> -->
             <span class="photo__label">GROUP PHOTO · 4:3</span>
           </div>
 
@@ -1287,6 +1298,12 @@
         </div>
       </div>
 
+      <div class="footer__business">
+        <div>PIQUENIQUE BISTRO · 대표 곽종희</div>
+        <div>사업자등록번호 298-18-01111</div>
+        <div>전화 <a href="tel:07078404513">070-7840-4513</a></div>
+      </div>
+
       <div class="footer__copy">
         © 2010–2026 PIQUENIQUE BISTRO. ALL RIGHTS RESERVED.
       </div>
@@ -1311,7 +1328,7 @@
     3) 아래 KAKAO_JAVASCRIPT_KEY 값을 발급받은 JavaScript 키로 교체합니다.
   -->
   <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=733f659f988109f91b21ad3472e12208"></script>
-<script>
+  <script>
     (function () {
       const container = document.getElementById('kakao-map');
       const lat = 37.486650503641;
